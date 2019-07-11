@@ -2,11 +2,11 @@
 
 namespace Motivo\EditorJsDataConverter\Converters;
 
+use Illuminate\Support\Arr;
 use Motivo\EditorJsDataConverter\Converters\Contracts\Converter;
 use Motivo\EditorJsDataConverter\Exceptions\InvalidEditorDataException;
 use Motivo\EditorJsDataConverter\Traits\WithHtml;
 use Spatie\Html\Elements\Element;
-use Illuminate\Support\Arr;
 
 class EmbedConverter implements Converter
 {
@@ -58,6 +58,15 @@ class EmbedConverter implements Converter
             'src' => $url,
             'frameborder' => '0',
             'allowFullscreen' => 'true',
+        ];
+
+        return $this->html->element('iframe')->attributes($attrs)->class('embed-responsive-item');
+    }
+
+    private function getVimeo(string $url): Element
+    {
+        $attrs = [
+            'src' => $url,
         ];
 
         return $this->html->element('iframe')->attributes($attrs)->class('embed-responsive-item');
